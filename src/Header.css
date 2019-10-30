@@ -1,0 +1,31 @@
+.Header {
+  background-color: #2d325a;
+  margin: 0;
+  height: 280px;
+  width: 100%;
+}
+
+.Header-title {
+  font-family: 'Escafina Low';
+  font-size: 108px;
+  line-height: 64px;
+  padding: 48px 0 0 0;
+  margin: 0;
+  overflow-wrap: break-word;
+}
+
+.Header-title--gold {
+  color: #dbb13b;
+}
+
+.Header-title--seafoam {
+  color: #56bda2;
+}
+
+.Header-title--babyblue {
+  color: #2494a2;
+}
+
+.Header-logo {
+  width: 100%;
+}

@@ -1,20 +1,47 @@
+/* yellow: #dbb13b, seafoam: #56bda2, lightblue: #2494a2, blue: #304b78, darkblue: #2d325a, navy: #0a0e29 */
+ 
+
 body {
-  background: lightblue;
+  background: #e6ffff;
 }
 
 .App {
+  margin: 0;
+  padding: 0;
   text-align: center;
-}
-
-.App-logo {
-  height: 500px;
+  width: 100%;
 }
 
 .App-header {
-  background-color: gray;
-  height: 150px;
-  padding: 20px;
-  color: white;
+  background-color: #2d325a;
+  margin: 0;
+  height: 280px;
+  width: 100%;
+}
+
+.App-title {
+  font-family: 'Escafina Low';
+  font-size: 108px;
+  line-height: 64px;
+  padding: 48px 0 0 0;
+  margin: 0;
+  overflow-wrap: break-word;
+}
+
+.App-title--gold {
+  color: #dbb13b;
+}
+
+.App-title--seafoam {
+  color: #56bda2;
+}
+
+.App-title--babyblue {
+  color: #2494a2;
+}
+
+.App-logo {
+  width: 100%;
 }
 
 @keyframes App-logo-spin {
@@ -23,11 +50,7 @@ body {
 }
 
 .App-layer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  /* position: fixed; */
 }
 
 .App-food {

@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Escafina Low';
+    src: url('Escafina-Low.woff2') format('woff2'),
+        url('Escafina-Low.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
