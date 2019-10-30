@@ -1,0 +1,39 @@
+body {
+  background: lightblue;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 500px;
+}
+
+.App-header {
+  background-color: gray;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.App-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.App-food {
+  animation: App-logo-spin infinite 5s linear;
+  position: absolute;
+  height: 100px;
+  left: 300px;
+  top: 400px;
+}
