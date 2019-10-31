@@ -2,6 +2,8 @@
  * action types
  */
 
+export const NEW_GAME = 'NEW_GAME';
+export const END_GAME = 'END_GAME';
 export const ADD_FOOD = 'ADD_FOOD';
 export const FEED_SERENA = 'FEED_SERENA';
 

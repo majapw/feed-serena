@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux'
 import {
   NEW_GAME,
   END_GAME,
@@ -10,25 +9,24 @@ import {
 /*
 {
   gameState: ?,
-  visibleFoods: [
+  foods: [
     {
       id: string,
       type: string,
       points: number,
+      isEaten: boolean,
 
       posX: number,
       posY: number,
     }
   ],
-  eatenFoods?: [],
   points: number,
 }
  */
 
 const initialState = {
   gameState: GAME_STATE.PENDING,
-  visibleFoods: [],
-  eatenFoods: [],
+  foods: [],
   points: 0,
 }
 
@@ -38,8 +36,7 @@ function feedSerenaApp(state = initialState, action) {
       return {
         ...state,
         gameState: GAME_STATE.ACTIVE,
-        visibleFoods: [],
-        eatenFoods: [],
+        foods: [],
         points: 0,
       };
     case END_GAME:
@@ -49,10 +46,11 @@ function feedSerenaApp(state = initialState, action) {
       };
 
     case ADD_FOOD:
+
       return {
         ...state,
-        visibleFoods: [
-          ...state.visibleFoods,
+        foods: [
+          ...state.foods,
           action.food,
         ],
       };
