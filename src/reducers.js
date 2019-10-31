@@ -3,6 +3,7 @@ import {
   DECREMENT_TIME,
   END_GAME,
   ADD_FOOD,
+  HIDE_FOOD,
   FEED_SERENA,
   GAME_STATE,
   GAME_LENGTH,
@@ -18,7 +19,7 @@ import {
       id: string,
       type: string,
       points: number,
-      isEaten: boolean,
+      isVisible: boolean,
 
       posX: number,
       posY: number,
@@ -32,6 +33,24 @@ const initialState = {
   gamePoints: 0,
   gameTime: 0,
   foods: [],
+}
+
+function isSelectedFood(food, action) {
+  return food.id === action.id && food.type === action.foodType; 
+}
+
+function getStateWithHiddenFood(action, foods) {
+  const hiddenFood = foods.filter((food) => isSelectedFood(food, action))[0];
+  const rest = foods.filter((food) => !isSelectedFood(food, action));
+  return {
+    foods: [
+      ...rest,
+      {
+        ...hiddenFood,
+        isVisible: false,
+      },
+    ],
+  };
 }
 
 function feedSerenaApp(state = initialState, action) {
@@ -65,20 +84,17 @@ function feedSerenaApp(state = initialState, action) {
           action.food,
         ],
       };
-    case FEED_SERENA:
-      const isSelectedFood = (food) => (food.id === action.id && food.type === action.foodType);
-      const eatenFood = state.foods.filter(isSelectedFood)[0];
-      const rest = state.foods.filter((food) => !isSelectedFood(food));
+    case HIDE_FOOD:
       return {
         ...state,
-        gamePoints: state.gamePoints + eatenFood.points,
-        foods: [
-          ...rest,
-          {
-            ...eatenFood,
-            isEaten: true,
-          },
-        ],
+        ...getStateWithHiddenFood(action, state.foods),
+      }
+    
+    case FEED_SERENA:
+      return {
+        ...state,
+        ...getStateWithHiddenFood(action, state.foods),
+        gamePoints: state.gamePoints + action.points,
       }
 
     default:

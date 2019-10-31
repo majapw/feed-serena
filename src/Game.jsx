@@ -19,7 +19,7 @@ const mapStateToProps = ({ gameState, gamePoints, gameTime, foods }) => ({
   gameState,
   gamePoints,
   gameTime,
-  foods: foods.filter(food => !food.isEaten),
+  foods: foods.filter(food => food.isVisible),
 });
 
 class Game extends Component {
@@ -57,7 +57,7 @@ class Game extends Component {
 
   onFoodClick({ id, type, points }) {
     const { dispatch } = this.props;
-    dispatch(feedSerena(id, type));
+    dispatch(feedSerena(id, type, points));
   }
 
   getNewFood() {
@@ -65,7 +65,7 @@ class Game extends Component {
     const type = foodTypes[Math.floor(Math.random() * foodTypes.length)];
     const randomXValue = this.getRandomValue(this.windowWidth)
     const randomYValue = this.getRandomValue(this.windowHeight);
-    const { points } = FOODS[type];
+    const { points, ttl } = FOODS[type];
 
     const id = `${randomXValue},${randomYValue}`;
     return {
@@ -74,7 +74,8 @@ class Game extends Component {
       posX: randomXValue,
       posY: randomYValue,
       points,
-      isEaten: false,
+      isVisible: true,
+      ttl,
     };
   }
   
