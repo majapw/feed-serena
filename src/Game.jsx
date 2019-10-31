@@ -5,7 +5,13 @@ import './Game.css';
 
 import Food, { FOODS, FOOD_HEIGHT } from './Food';
 
-import { GAME_STATE, newGame, endGame, addFood } from './actions';
+import { 
+  GAME_STATE, 
+  newGame, 
+  endGame, 
+  addFood, 
+  feedSerena,
+} from './actions';
 
 const mapStateToProps = ({ gameState, foods }) => ({
   gameState,
@@ -41,14 +47,9 @@ class Game extends Component {
     return randomValue;
   }
 
-  onFoodClick(idToRemove, typeToRemove) {
-    // const { foods } = this.state;
-    // const newFoods = foods.filter(({ id, type }) => !(id === idToRemove && type === typeToRemove));
-
-    // // LOL this has concurrency issues
-    // this.setState({
-    //   foods: newFoods,
-    // });
+  onFoodClick({ id, type }) {
+    const { dispatch } = this.props;
+    dispatch(feedSerena(id, type));
   }
 
   getNewFood() {
@@ -78,6 +79,7 @@ class Game extends Component {
             type={type} 
             posX={posX} 
             posY={posY} 
+            onClick={() => this.onFoodClick({ id, type })}
           />
         ))}
         {gameState === GAME_STATE.PENDING &&
