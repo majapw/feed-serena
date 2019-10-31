@@ -42,20 +42,20 @@ class Game extends Component {
     const generateFoodInterval = setInterval(() => {
       const food = this.getNewFood();
       dispatch(addFood(food));
-      // setTimeout(() => {
-      //   dispatch(hideFood(food));
-      // }, food.ttl * 1000);
+      setTimeout(() => {
+        dispatch(hideFood(food));
+      }, food.ttl * 1000);
     }, 500);
 
 
     const decrementTimeInterval = setInterval(() => {
-    //   dispatch(decrementTime());
+      dispatch(decrementTime());
     }, 1000);
 
     setTimeout(() => {
       clearInterval(generateFoodInterval);
       clearInterval(decrementTimeInterval);
-      // dispatch(endGame());
+      dispatch(endGame());
     }, GAME_LENGTH * 1000);
   }
 

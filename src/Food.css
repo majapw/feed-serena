@@ -5,8 +5,6 @@
 
 .Food {
   position: absolute;
-  height: 0;
-  width: 0;
   z-index: 9999;
 }
 
@@ -19,6 +17,6 @@
   font-weight: 900;
   font-size: 18px;
   position: absolute;
-  left: 85px;
-  top: 100px
+  right: -15px;
+  bottom: 0;
 }
