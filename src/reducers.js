@@ -54,7 +54,20 @@ function feedSerenaApp(state = initialState, action) {
           action.food,
         ],
       };
-    // case FEED_SERENA:
+    case FEED_SERENA:
+      const isSelectedFood = (food) => (food.id === action.id && food.type === action.foodType);
+      const eatenFood = state.foods.filter(isSelectedFood)[0];
+      const rest = state.foods.filter((food) => !isSelectedFood(food));
+      return {
+        ...state,
+        foods: [
+          ...rest,
+          {
+            ...eatenFood,
+            isEaten: true,
+          },
+        ],
+      }
 
     default:
       return state;

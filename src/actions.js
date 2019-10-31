@@ -30,5 +30,5 @@ export function addFood(food) {
 }
 
 export function feedSerena(id, type) {
-  return { type: FEED_SERENA, id, type };
+  return { type: FEED_SERENA, id, foodType: type };
 }

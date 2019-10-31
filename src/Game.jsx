@@ -13,6 +13,8 @@ import {
   feedSerena,
 } from './actions';
 
+const GAME_LENGTH = 5 * 1000;
+
 const mapStateToProps = ({ gameState, foods }) => ({
   gameState,
   foods: foods.filter(food => !food.isEaten),
@@ -37,7 +39,8 @@ class Game extends Component {
     const generateFoodInterval = setInterval(() => dispatch(addFood(this.getNewFood())), 1000);
     setTimeout(() => {
       clearInterval(generateFoodInterval);
-    }, 5000);
+      dispatch(endGame());
+    }, GAME_LENGTH);
   }
 
   getRandomValue(maxValue) {
