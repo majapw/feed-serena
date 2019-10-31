@@ -36,7 +36,7 @@ const initialState = {
 }
 
 function isSelectedFood(food, action) {
-  return food.id === action.id && food.type === action.foodType; 
+  return food.id === action.id;
 }
 
 function getStateWithHiddenFood(action, foods) {

@@ -34,16 +34,14 @@ export function endGame() {
   return { type: END_GAME };
 }
 
-
-
 export function addFood(food) {
   return { type: ADD_FOOD, food };
 }
 
-export function hideFood(id, type) {
-  return { type: ADD_FOOD, id, foodType: type };
+export function hideFood({ id, type }) {
+  return { type: HIDE_FOOD, id, foodType: type };
 }
 
-export function feedSerena(id, type, points) {
+export function feedSerena({ id, type, points }) {
   return { type: FEED_SERENA, id, foodType: type, points };
 }

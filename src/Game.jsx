@@ -13,6 +13,7 @@ import {
   addFood, 
   feedSerena,
   decrementTime,
+  hideFood,
 } from './actions';
 
 const mapStateToProps = ({ gameState, gamePoints, gameTime, foods }) => ({
@@ -39,8 +40,12 @@ class Game extends Component {
     dispatch(newGame());
 
     const generateFoodInterval = setInterval(() => {
-      dispatch(addFood(this.getNewFood()));
+      const food = this.getNewFood();
+      dispatch(addFood(food));
       dispatch(decrementTime());
+      setTimeout(() => {
+        dispatch(hideFood(food));
+      }, food.ttl * 1000);
     }, 1000);
     setTimeout(() => {
       clearInterval(generateFoodInterval);
@@ -55,9 +60,9 @@ class Game extends Component {
     return randomValue;
   }
 
-  onFoodClick({ id, type, points }) {
+  onFoodClick(food) {
     const { dispatch } = this.props;
-    dispatch(feedSerena(id, type, points));
+    dispatch(feedSerena(food));
   }
 
   getNewFood() {
@@ -67,7 +72,7 @@ class Game extends Component {
     const randomYValue = this.getRandomValue(this.windowHeight);
     const { points, ttl } = FOODS[type];
 
-    const id = `${randomXValue},${randomYValue}`;
+    const id = `${type}-${randomXValue},${randomYValue}`;
     return {
       id,
       type,
@@ -81,7 +86,7 @@ class Game extends Component {
   
   render() {
     const { gameState, gamePoints, gameTime, foods } = this.props;
-    console.log(this.props);
+    
     return (
       <div className="Game">
         {foods.map((food) => (
