@@ -9,6 +9,8 @@ class Game extends Component {
     this.state = {
       foods: [],
     }
+
+    this.startGame = this.startGame.bind(this);
   }
 
   componentDidMount() {
@@ -21,6 +23,10 @@ class Game extends Component {
     }, 5000)
   }
 
+  startGame() {
+
+  }
+
   getRandomValue(maxValue) {
     const randomValue = Math.floor(Math.random() * maxValue);
     if (randomValue > (maxValue - FOOD_HEIGHT)) return maxValue - FOOD_HEIGHT;
@@ -31,7 +37,7 @@ class Game extends Component {
   onFoodClick(idToRemove, typeToRemove) {
     const { foods } = this.state;
     const newFoods = foods.filter(({ id, type }) => !(id === idToRemove && type === typeToRemove));
-    console.log(newFoods);
+
     // LOL this has concurrency issues
     this.setState({
       foods: newFoods,
@@ -75,6 +81,17 @@ class Game extends Component {
     return (
       <div className="Game">
         {foods.map(({ node }) => node)}
+        <div className="Game-controls">
+          <div className="Game-instructions">Help #FeedSerena!</div>
+          <button 
+            className="Game-start" 
+            type="button" 
+            onClick={this.startGame}
+          >
+            Start Game
+          </button>
+        </div>
+        
       </div>
     );
   }

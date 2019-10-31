@@ -1,5 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  background: #e6ffff;
+  font-family: "Edmondsans";
+  font-size: 24px;
 }
