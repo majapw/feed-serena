@@ -12,10 +12,12 @@ import {
   endGame, 
   addFood, 
   feedSerena,
+  decrementTime,
 } from './actions';
 
-const mapStateToProps = ({ gameState, gameTime, foods }) => ({
+const mapStateToProps = ({ gameState, gamePoints, gameTime, foods }) => ({
   gameState,
+  gamePoints,
   gameTime,
   foods: foods.filter(food => !food.isEaten),
 });
@@ -36,7 +38,10 @@ class Game extends Component {
     const { dispatch } = this.props;
     dispatch(newGame());
 
-    const generateFoodInterval = setInterval(() => dispatch(addFood(this.getNewFood())), 1000);
+    const generateFoodInterval = setInterval(() => {
+      dispatch(addFood(this.getNewFood()));
+      dispatch(decrementTime());
+    }, 1000);
     setTimeout(() => {
       clearInterval(generateFoodInterval);
       dispatch(endGame());
@@ -50,7 +55,7 @@ class Game extends Component {
     return randomValue;
   }
 
-  onFoodClick({ id, type }) {
+  onFoodClick({ id, type, points }) {
     const { dispatch } = this.props;
     dispatch(feedSerena(id, type));
   }
@@ -60,6 +65,7 @@ class Game extends Component {
     const type = foodTypes[Math.floor(Math.random() * foodTypes.length)];
     const randomXValue = this.getRandomValue(this.windowWidth)
     const randomYValue = this.getRandomValue(this.windowHeight);
+    const { points } = FOODS[type];
 
     const id = `${randomXValue},${randomYValue}`;
     return {
@@ -67,24 +73,30 @@ class Game extends Component {
       type,
       posX: randomXValue,
       posY: randomYValue,
+      points,
       isEaten: false,
     };
   }
   
   render() {
-    const { gameState, gameTime, foods } = this.props;
+    const { gameState, gamePoints, gameTime, foods } = this.props;
     console.log(this.props);
     return (
       <div className="Game">
-        {foods.map(({ id, type, posX, posY }) => (
+        {foods.map((food) => (
           <Food 
-            key={id} 
-            type={type} 
-            posX={posX} 
-            posY={posY} 
-            onClick={() => this.onFoodClick({ id, type })}
+            key={food.id} 
+            type={food.type} 
+            posX={food.posX} 
+            posY={food.posY} 
+            onClick={() => this.onFoodClick(food)}
           />
         ))}
+
+        {gameState === GAME_STATE.ACTIVE &&
+          <div className="Game-points">{`${gamePoints}pts`}</div>
+        }
+
         <div className="Game-controls">
           {gameState === GAME_STATE.PENDING &&
             <div>
@@ -102,10 +114,12 @@ class Game extends Component {
           {gameState === GAME_STATE.ACTIVE &&
             <div className="Game-countdown">{gameTime}</div>
           }
-
+        
           {gameState === GAME_STATE.GAME_OVER &&
             <div>
               <div className="Game-over">GAME OVER</div>
+              <div className="Game-final-points">{`You got ${gamePoints} points!`}</div>
+              
               <button 
                 className="Game-start" 
                 type="button" 

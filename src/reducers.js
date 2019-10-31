@@ -10,7 +10,9 @@ import {
 
 /*
 {
-  gameState: ?,
+  gameState: GAME_STATE,
+  gamePoints: number,
+  gameTime: number,
   foods: [
     {
       id: string,
@@ -22,15 +24,14 @@ import {
       posY: number,
     }
   ],
-  points: number,
 }
  */
 
 const initialState = {
   gameState: GAME_STATE.PENDING,
+  gamePoints: 0,
   gameTime: 0,
   foods: [],
-  points: 0,
 }
 
 function feedSerenaApp(state = initialState, action) {
@@ -39,6 +40,7 @@ function feedSerenaApp(state = initialState, action) {
       return {
         ...state,
         gameState: GAME_STATE.ACTIVE,
+        gamePoints: 0,
         gameTime: GAME_LENGTH,
         foods: [],
         points: 0,
@@ -56,7 +58,6 @@ function feedSerenaApp(state = initialState, action) {
       };
 
     case ADD_FOOD:
-
       return {
         ...state,
         foods: [
@@ -70,6 +71,7 @@ function feedSerenaApp(state = initialState, action) {
       const rest = state.foods.filter((food) => !isSelectedFood(food));
       return {
         ...state,
+        gamePoints: state.gamePoints + eatenFood.points,
         foods: [
           ...rest,
           {

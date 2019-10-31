@@ -12,16 +12,19 @@ export const FOODS = {
     src: avocado,
     alt: 'Avocado',
     points: 10,
+    ttl: 1,
   },
   chocochip: {
     src: chocochip,
     alt: 'Chocolate Chip Cookie',
     points: 50,
+    ttl: .2,
   },
   orange: {
     src: orange,
     alt: 'Cutie!',
     points: 5,
+    ttl: 2,
   }
 };
 

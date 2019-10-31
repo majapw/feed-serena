@@ -4,11 +4,28 @@
   right: 0;
   bottom: 0;
   padding: 36px;
+  z-index: 0;
 }
 
-.Game-instructions,
-.Game-over {
+.Game-instructions {
   margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.Game-over {
+  font-weight: 900;
+}
+
+.Game-final-points {
+  margin-bottom: 12px;
+}
+
+.Game-points {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  color: white;
+  font-weight: 100;
 }
 
 .Game-start {
@@ -32,7 +49,6 @@
 
   font-variant: small-caps;
   font-size: 24px;
-  font-weight: 900;
   letter-spacing: 2px;
 }
 
