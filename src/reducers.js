@@ -1,9 +1,11 @@
 import {
   NEW_GAME,
+  DECREMENT_TIME,
   END_GAME,
   ADD_FOOD,
   FEED_SERENA,
   GAME_STATE,
+  GAME_LENGTH,
 } from './actions'
 
 /*
@@ -26,6 +28,7 @@ import {
 
 const initialState = {
   gameState: GAME_STATE.PENDING,
+  gameTime: 0,
   foods: [],
   points: 0,
 }
@@ -36,13 +39,20 @@ function feedSerenaApp(state = initialState, action) {
       return {
         ...state,
         gameState: GAME_STATE.ACTIVE,
+        gameTime: GAME_LENGTH,
         foods: [],
         points: 0,
       };
+    case DECREMENT_TIME:
+      return {
+        ...state,
+        gameTime: state.gameTime - 1,
+      }
     case END_GAME:
       return {
         ...state,
-        gameState: GAME_STATE.PENDING,
+        foods: [],
+        gameState: GAME_STATE.GAME_OVER,
       };
 
     case ADD_FOOD:

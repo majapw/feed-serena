@@ -6,17 +6,17 @@ import './Game.css';
 import Food, { FOODS, FOOD_HEIGHT } from './Food';
 
 import { 
-  GAME_STATE, 
+  GAME_STATE,
+  GAME_LENGTH,
   newGame, 
   endGame, 
   addFood, 
   feedSerena,
 } from './actions';
 
-const GAME_LENGTH = 5 * 1000;
-
-const mapStateToProps = ({ gameState, foods }) => ({
+const mapStateToProps = ({ gameState, gameTime, foods }) => ({
   gameState,
+  gameTime,
   foods: foods.filter(food => !food.isEaten),
 });
 
@@ -40,7 +40,7 @@ class Game extends Component {
     setTimeout(() => {
       clearInterval(generateFoodInterval);
       dispatch(endGame());
-    }, GAME_LENGTH);
+    }, GAME_LENGTH * 1000);
   }
 
   getRandomValue(maxValue) {
@@ -72,7 +72,7 @@ class Game extends Component {
   }
   
   render() {
-    const { gameState, foods } = this.props;
+    const { gameState, gameTime, foods } = this.props;
     console.log(this.props);
     return (
       <div className="Game">
@@ -85,18 +85,37 @@ class Game extends Component {
             onClick={() => this.onFoodClick({ id, type })}
           />
         ))}
-        {gameState === GAME_STATE.PENDING &&
-          <div className="Game-controls">
-            <div className="Game-instructions">Help #FeedSerena!</div>
-            <button 
-              className="Game-start" 
-              type="button" 
-              onClick={this.startGame}
-            >
-              Start Game
-            </button>
+        <div className="Game-controls">
+          {gameState === GAME_STATE.PENDING &&
+            <div>
+              <div className="Game-instructions">Help #FeedSerena!</div>
+              <button 
+                className="Game-start" 
+                type="button" 
+                onClick={this.startGame}
+              >
+                Start Game
+              </button>
+            </div>
+          }
+
+          {gameState === GAME_STATE.ACTIVE &&
+            <div className="Game-countdown">{gameTime}</div>
+          }
+
+          {gameState === GAME_STATE.GAME_OVER &&
+            <div>
+              <div className="Game-over">GAME OVER</div>
+              <button 
+                className="Game-start" 
+                type="button" 
+                onClick={this.startGame}
+              >
+                Play again?
+              </button>
+            </div>
+          }
           </div>
-        }
       </div>
     );
   }

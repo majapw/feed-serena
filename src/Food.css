@@ -4,6 +4,18 @@
 }
 
 .Food {
-  animation: Food-spin infinite 5s linear;
   position: absolute;
+}
+
+.Food-img {
+  animation: Food-spin infinite 5s linear;
+}
+
+.Food-points {
+  color: #f0006f;
+  font-weight: 900;
+  font-size: 18px;
+  position: absolute;
+  right: -15px;
+  bottom: 0
 }

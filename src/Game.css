@@ -6,7 +6,8 @@
   padding: 36px;
 }
 
-.Game-instructions {
+.Game-instructions,
+.Game-over {
   margin-bottom: 12px;
 }
 

@@ -11,28 +11,37 @@ export const FOODS = {
   avocado: {
     src: avocado,
     alt: 'Avocado',
+    points: 10,
   },
   chocochip: {
     src: chocochip,
     alt: 'Chocolate Chip Cookie',
+    points: 50,
   },
   orange: {
     src: orange,
     alt: 'Cutie!',
+    points: 5,
   }
 };
 
 function Food({ type, posX, posY, onClick }) {
-  const { name, src } = FOODS[type];
+  const { name, src, points } = FOODS[type];
 
   return (
-    <img 
-      className="Food" 
-      src={src} 
-      alt={name} 
-      style={{ top: posY, left: posX, height: FOOD_HEIGHT }}
-      onClick={onClick}
-    />
+    <div 
+      className="Food"
+      style={{ top: posY, left: posX }}
+    >
+      <img 
+        className="Food-img" 
+        src={src} 
+        alt={name} 
+        style={{ height: FOOD_HEIGHT }}
+        onClick={onClick}
+      />
+      <div className="Food-points">{`+${points}pts`}</div>
+    </div>
   )
 }
 
