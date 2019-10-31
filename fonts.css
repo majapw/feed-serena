@@ -7,7 +7,7 @@
 }
 
 @font-face {
-    font-family: 'ProspectusStd Lt';
+    font-family: 'ProspectusStd';
     src: url('ProspectusStd-Lt.woff2') format('woff2'),
         url('ProspectusStd-Lt.woff') format('woff');
     font-weight: 300;
@@ -23,7 +23,7 @@
 }
 
 @font-face {
-    font-family: 'ProspectusStd Reg';
+    font-family: 'ProspectusStd';
     src: url('ProspectusStd-Reg.woff2') format('woff2'),
         url('ProspectusStd-Reg.woff') format('woff');
     font-weight: normal;
@@ -31,7 +31,7 @@
 }
 
 @font-face {
-    font-family: 'ProspectusStd Blk';
+    font-family: 'ProspectusStd';
     src: url('ProspectusStd-Blk.woff2') format('woff2'),
         url('ProspectusStd-Blk.woff') format('woff');
     font-weight: 900;
@@ -39,7 +39,7 @@
 }
 
 @font-face {
-    font-family: 'ProspectusStd SBd';
+    font-family: 'ProspectusStd';
     src: url('ProspectusStd-SBd.woff2') format('woff2'),
         url('ProspectusStd-SBd.woff') format('woff');
     font-weight: 600;
@@ -48,7 +48,7 @@
 
 
 @font-face {
-    font-family: 'ProspectusStd Thn';
+    font-family: 'ProspectusStd';
     src: url('ProspectusStd-Thn.woff2') format('woff2'),
         url('ProspectusStd-Thn.woff') format('woff');
     font-weight: 100;
