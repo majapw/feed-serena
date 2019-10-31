@@ -16,7 +16,7 @@ export const GAME_STATE = {
   GAME_OVER: 'game over',
 };
 
-export const GAME_LENGTH = 30;
+export const GAME_LENGTH = 20;
 
 /*
  * action creators

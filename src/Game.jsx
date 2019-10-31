@@ -45,7 +45,7 @@ class Game extends Component {
       setTimeout(() => {
         dispatch(hideFood(food));
       }, food.ttl * 1000);
-    }, 500);
+    }, 300);
 
 
     const decrementTimeInterval = setInterval(() => {
