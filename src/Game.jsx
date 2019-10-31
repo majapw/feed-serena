@@ -42,14 +42,20 @@ class Game extends Component {
     const generateFoodInterval = setInterval(() => {
       const food = this.getNewFood();
       dispatch(addFood(food));
-      dispatch(decrementTime());
-      setTimeout(() => {
-        dispatch(hideFood(food));
-      }, food.ttl * 1000);
+      // setTimeout(() => {
+      //   dispatch(hideFood(food));
+      // }, food.ttl * 1000);
+    }, 500);
+
+
+    const decrementTimeInterval = setInterval(() => {
+    //   dispatch(decrementTime());
     }, 1000);
+
     setTimeout(() => {
       clearInterval(generateFoodInterval);
-      dispatch(endGame());
+      clearInterval(decrementTimeInterval);
+      // dispatch(endGame());
     }, GAME_LENGTH * 1000);
   }
 
@@ -88,16 +94,18 @@ class Game extends Component {
     const { gameState, gamePoints, gameTime, foods } = this.props;
     
     return (
-      <div className="Game">
-        {foods.map((food) => (
-          <Food 
-            key={food.id} 
-            type={food.type} 
-            posX={food.posX} 
-            posY={food.posY} 
-            onClick={() => this.onFoodClick(food)}
-          />
-        ))}
+      <div className="Game-container">
+        <div className={gameState === GAME_STATE.ACTIVE && 'Game-active'}>
+          {foods.map((food) => (
+            <Food 
+              key={food.id} 
+              type={food.type} 
+              posX={food.posX} 
+              posY={food.posY} 
+              onClick={() => this.onFoodClick(food)}
+            />
+          ))}
+        </div>
 
         {gameState === GAME_STATE.ACTIVE &&
           <div className="Game-points">{`${gamePoints}pts`}</div>
