@@ -3,7 +3,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 20px;
+  padding: 36px;
 }
 
 .Game-instructions {
@@ -31,6 +31,7 @@
 
   font-variant: small-caps;
   font-size: 24px;
+  font-weight: 900;
   letter-spacing: 2px;
 }
 
@@ -40,5 +41,9 @@
 }
 
 .Game-start:active {
+  background: #c00058;
+}
+
+.Game-start:hover {
   background: #c00058;
 }
