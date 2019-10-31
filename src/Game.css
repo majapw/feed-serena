@@ -5,6 +5,7 @@
   bottom: 0;
   padding: 36px;
   z-index: 0;
+  background: rgba(256, 256, 256, 0.7);
 }
 
 .Game-instructions {

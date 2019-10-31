@@ -29,4 +29,5 @@
 .Header-logo {
   width: 100%;
   max-width: 375px;
+  margin-top: -48px;
 }
