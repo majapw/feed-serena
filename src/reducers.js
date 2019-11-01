@@ -39,7 +39,7 @@ function isSelectedFood(food, action) {
   return food.id === action.id;
 }
 
-function getStateWithHiddenFood(action, foods) {
+function getStateWithSelectedFoodChange(action, foods, change) {
   const hiddenFood = foods.filter((food) => isSelectedFood(food, action))[0];
   const rest = foods.filter((food) => !isSelectedFood(food, action));
   return {
@@ -47,7 +47,7 @@ function getStateWithHiddenFood(action, foods) {
       ...rest,
       {
         ...hiddenFood,
-        isVisible: false,
+        ...change,
       },
     ],
   };
@@ -87,13 +87,13 @@ function feedSerenaApp(state = initialState, action) {
     case HIDE_FOOD:
       return {
         ...state,
-        ...getStateWithHiddenFood(action, state.foods),
+        ...getStateWithSelectedFoodChange(action, state.foods, { isVisible: false }),
       }
     
     case FEED_SERENA:
       return {
         ...state,
-        ...getStateWithHiddenFood(action, state.foods),
+        ...getStateWithSelectedFoodChange(action, state.foods, { isVisible: false }),
         gamePoints: state.gamePoints + action.points,
       }
 

@@ -65,7 +65,7 @@ class Game extends Component {
       if (!debug) {
         dispatch(endGame());
       }
-    }, debug ? 5000 : GAME_LENGTH * 1000);
+    }, debug ? 1000 : GAME_LENGTH * 1000);
   }
 
   getRandomValue(maxValue) {
@@ -77,7 +77,10 @@ class Game extends Component {
 
   onFoodClick(food) {
     const { dispatch } = this.props;
-    dispatch(feedSerena(food));
+    food.posX = 'calc(50% - 50px)';
+    food.posY = 500;
+    this.setState({});
+    setTimeout(() => dispatch(feedSerena(food)), 500);
   }
 
   getNewFood() {
@@ -93,8 +96,6 @@ class Game extends Component {
       type,
       posX: randomXValue,
       posY: randomYValue,
-      // posX: '50%', // randomXValue,
-      // posY: '50%', // randomYValue,
       points,
       isVisible: true,
       ttl,

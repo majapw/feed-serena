@@ -6,6 +6,7 @@
 .Food {
   position: absolute;
   z-index: 9999;
+  transition: top 0.5s, left 0.5s;
 }
 
 .Food-img {
