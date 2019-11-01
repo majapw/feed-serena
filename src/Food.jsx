@@ -134,7 +134,8 @@ function Food({ type, posX, posY, onClick }) {
         src={src} 
         alt={name} 
         style={{ height: FOOD_HEIGHT }}
-        onClick={onClick}
+        onMouseDown={onClick}
+        onTouchStart={onClick}
       />
       <div className="Food-points">{`+${points}pts`}</div>
     </div>

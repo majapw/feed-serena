@@ -49,7 +49,7 @@ class Game extends Component {
       const food = this.getNewFood();
       dispatch(addFood(food));
       if (!debug) {
-        setTimeout(() => {
+        food.hideFoodTimeout = setTimeout(() => {
           dispatch(hideFood(food));
         }, food.ttl * 1000);
       }
@@ -84,6 +84,7 @@ class Game extends Component {
     food.posX = 'calc(50% - 50px)';
     food.posY = 500;
     this.setState({});
+    clearTimeout(food.hideFoodTimeout);
     setTimeout(() => dispatch(feedSerena(food)), 500);
   }
 
