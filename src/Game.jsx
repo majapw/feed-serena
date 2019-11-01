@@ -26,6 +26,9 @@ const mapStateToProps = ({ gameState, gamePoints, gameTime, foods }) => ({
 class Game extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      debug: false,
+    };
 
     this.startGame = this.startGame.bind(this);
   }
@@ -37,14 +40,17 @@ class Game extends Component {
 
   startGame() {
     const { dispatch } = this.props;
+    const { debug } = this.state;
     dispatch(newGame());
 
     const generateFoodInterval = setInterval(() => {
       const food = this.getNewFood();
       dispatch(addFood(food));
-      setTimeout(() => {
-        dispatch(hideFood(food));
-      }, food.ttl * 1000);
+      if (!debug) {
+        setTimeout(() => {
+          dispatch(hideFood(food));
+        }, food.ttl * 1000);
+      }
     }, 300);
 
 
@@ -55,8 +61,11 @@ class Game extends Component {
     setTimeout(() => {
       clearInterval(generateFoodInterval);
       clearInterval(decrementTimeInterval);
-      dispatch(endGame());
-    }, GAME_LENGTH * 1000);
+
+      if (!debug) {
+        dispatch(endGame());
+      }
+    }, debug ? 5000 : GAME_LENGTH * 1000);
   }
 
   getRandomValue(maxValue) {
@@ -84,6 +93,8 @@ class Game extends Component {
       type,
       posX: randomXValue,
       posY: randomYValue,
+      // posX: '50%', // randomXValue,
+      // posY: '50%', // randomYValue,
       points,
       isVisible: true,
       ttl,
