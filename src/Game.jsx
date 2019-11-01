@@ -27,6 +27,7 @@ class Game extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      enablePlayAgainButton: false,
       debug: false,
     };
 
@@ -41,6 +42,7 @@ class Game extends Component {
   startGame() {
     const { dispatch } = this.props;
     const { debug } = this.state;
+    this.setState({ enablePlayAgainButton: false });
     dispatch(newGame());
 
     const generateFoodInterval = setInterval(() => {
@@ -61,6 +63,8 @@ class Game extends Component {
     setTimeout(() => {
       clearInterval(generateFoodInterval);
       clearInterval(decrementTimeInterval);
+
+      setTimeout(() => this.setState({ enablePlayAgainButton: true }), 500);
 
       if (!debug) {
         dispatch(endGame());
@@ -104,6 +108,7 @@ class Game extends Component {
   
   render() {
     const { gameState, gamePoints, gameTime, foods } = this.props;
+    const { enablePlayAgainButton } = this.state;
     
     return (
       <div className="Game-container">
@@ -150,7 +155,8 @@ class Game extends Component {
               <button 
                 className="Game-start" 
                 type="button" 
-                onClick={this.startGame}
+                onClick={enablePlayAgainButton ? this.startGame : () => {}}
+                disabled={!enablePlayAgainButton}
               >
                 Play again?
               </button>
