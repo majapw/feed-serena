@@ -83,6 +83,7 @@ class Game extends Component {
     const { dispatch } = this.props;
     food.posX = 'calc(50% - 50px)';
     food.posY = 500;
+    food.isAnimating = true,
     this.setState({});
     clearTimeout(food.hideFoodTimeout);
     setTimeout(() => dispatch(feedSerena(food)), 500);
@@ -102,6 +103,7 @@ class Game extends Component {
       posX: randomXValue,
       posY: randomYValue,
       points,
+      isAnimating: false,
       isVisible: true,
       ttl,
     };
@@ -113,17 +115,19 @@ class Game extends Component {
     
     return (
       <div className="Game-container">
-        <div className={gameState === GAME_STATE.ACTIVE && 'Game-active'}>
-          {foods.map((food) => (
-            <Food 
-              key={food.id} 
-              type={food.type} 
-              posX={food.posX} 
-              posY={food.posY} 
-              onClick={() => this.onFoodClick(food)}
-            />
-          ))}
-        </div>
+        {gameState === GAME_STATE.ACTIVE &&
+          <div className="Game-active">
+            {foods.map((food) => (
+              <Food 
+                key={food.id}
+                type={food.type}
+                posX={food.posX}
+                posY={food.posY}
+                onClick={(e) => !food.isAnimating && this.onFoodClick(food, e)}
+              />
+            ))}
+          </div>
+        }
 
         {gameState === GAME_STATE.ACTIVE &&
           <div className="Game-points">{`${gamePoints}pts`}</div>
