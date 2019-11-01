@@ -134,6 +134,7 @@ class Game extends Component {
               >
                 Start Game
               </button>
+              <div className="Game-instructions-2">Tap on each piece of food to get points. Each type of food has a different point value. :) Don't let Serena be hangry!</div>
             </div>
           }
 

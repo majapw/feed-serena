@@ -30,6 +30,11 @@
   font-weight: 600;
 }
 
+.Game-instructions-2 {
+  margin-top: 12px;
+  font-size: 18px;
+}
+
 .Game-over {
   font-weight: 900;
 }
